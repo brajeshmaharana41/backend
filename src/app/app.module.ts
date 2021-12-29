@@ -134,6 +134,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { SearchResultComponent } from './components/search-result/search-result.component';
 import { ReviewInputComponent } from './private/my-account/orders/review-input/review-input.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { Store } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -230,6 +233,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     SidebarComponent,
   ],
   imports: [
+    EffectsModule,
+    StoreModule.forRoot({}),    
     BrowserModule,
     AppRoutingModule,
     NgbModule,
@@ -276,6 +281,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
   providers: [
     MatDatepickerModule,
     MatNativeDateModule,
+    Store
   ],
   bootstrap: [AppComponent]
 })

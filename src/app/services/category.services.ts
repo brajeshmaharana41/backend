@@ -1,21 +1,13 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { ProductService } from './product.service';
+// import { HttpClient } from "@angular/common/http";
+// import { Injectable } from "@angular/core";
 
-@Injectable({
-	providedIn: 'root'
-})
+// Injectable({
+//     providedIn: 'root'
+// })
+// export class CategoryServices {
+//     constructor( private http: HttpClient ){}
 
-export class CategoryServices {
-    constructor(private http: HttpClient, private urlService: ProductService) { }
-    getAllCategories() {
-		return new Promise((resolve, reject) => {
-			this.http.get(this.urlService.ALL_CATEGORIES)
-				.toPromise()
-				.then(
-					response => resolve(response),
-					error => reject(error)
-				);
-		});
-	}
-}
+//     getcategory() {
+//         return this.http.get(`http://localhost:3000/category/minilist`)
+//     }
+// }
