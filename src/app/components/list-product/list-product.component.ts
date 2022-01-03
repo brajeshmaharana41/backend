@@ -1,19 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-
-export interface ListProductData {
-  image: string;
-  title: string;
-  subtitle: string;
-  description: string;
-
-  reviews: number;
-  offers: number;
-  rating : number;
-  price: number;
-
-  favorite: string;
-  button_btn: string;
-}
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-list-product',
@@ -21,11 +6,20 @@ export interface ListProductData {
   styleUrls: ['./list-product.component.scss']
 })
 export class ListProductComponent implements OnInit {
-  @Input() listProduct : ListProductData;
+  @Input() listProduct : any;
+  @Input() selected: boolean;
+  @Output() selectedChange = new EventEmitter<boolean>();
 
-  constructor() { }
+  imgurl = "http://192.168.1.3:3000/images/products/";
+  // @Input() listProduct : any;
+  
+  constructor() {
+   }
 
   ngOnInit(): void {
   }
-
+  public toggleSelected() {
+    this.selected = !this.selected;
+    this.selectedChange.emit(this.selected);
+  }
 }

@@ -1,183 +1,59 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { ProductservicesList } from '../../product.services/common.services/product.service';
 
-export interface ListProductData {
-  image: string;
-  title: string;
-  subtitle: string;
-  description: string;
-
-  reviews: number;
-  offers: number;
-  rating : number;
-  price: number;
-
-  favorite: string;
-  button_btn: string;
-}
-
-const ProductData: ListProductData[] = [
-  { 
-    image: '../../../../../assets/product4.png',
-    title: 'School Bag Canvas with Art Kit',
-    subtitle: 'Bag of Assorted Stationery Crayons , Sketch Pens.',
-    description: ' Oil Pastel, Gel pens, Mechanical Pencils, Clay with Kids Activity Book inside',
-
-    reviews: 75,
-    offers: 5,
-    rating : 4.5,
-    price: 150,
-
-    favorite: 'favorite_border',
-    button_btn: 'Buy'
-  },
-
-  { 
-    image: '../../../../../assets/product2.png',
-    title: 'PARKER Vector Gold Pen',
-    subtitle: '(Gold Nib) Fountain Pen',
-    description: 'Body Color: Gold, Made of Gold Plated, Ink Color: Blue',
-
-    reviews: 75,
-    offers: 20,
-    rating : 4.5,
-    price: 12,
-
-    favorite: 'favorite_border',
-    button_btn: 'Buy'
-  },
-
-  { 
-    image: '../../../../../assets/product1.png',
-    title: 'Funblast Bag',
-    subtitle: 'Bag of Assorted Stationery Crayons , Sketch Pens.',
-    description: ' Oil Pastel, Gel pens, Mechanical Pencils, Clay with Kids Activity Book inside',
-
-    reviews: 75,
-    offers: 5,
-    rating : 4.5,
-    price: 100,
-
-    favorite: 'favorite_border',
-    button_btn: 'Buy'
-  },
-
-  { 
-    image: '../../../../../assets/product3.png',
-    title: 'Cello Colorup Kit',
-    subtitle: '(Gold Nib) Fountain Pen',
-    description: ' Body Color: Gold, Made of Gold Plated, Ink Color: Blue',
-
-    reviews: 75,
-    offers: 20,
-    rating : 4.5,
-    price: 18,
-
-    favorite: 'favorite_border',
-    button_btn: 'Buy'
-  },
-
-  { 
-    image: '../../../../../assets/product4.png',
-    title: 'School Bag Canvas with Art Kit',
-    subtitle: 'Bag of Assorted Stationery Crayons , Sketch Pens.',
-    description: ' Oil Pastel, Gel pens, Mechanical Pencils, Clay with Kids Activity Book inside',
-
-    reviews: 75,
-    offers: 5,
-    rating : 4.5,
-    price: 150,
-
-    favorite: 'favorite_border',
-    button_btn: 'Buy'
-  },
-
-  // { 
-  //   image: '../../../../../assets/product6.png',
-  //   title: 'School Bag Canvas with Art Kit',
-  //   subtitle: 'Bag of Assorted Stationery Crayons , Sketch Pens.',
-  //   description: ' Oil Pastel, Gel pens, Mechanical Pencils, Clay with Kids Activity Book inside',
-
-  //   reviews: 75,
-  //   offers: 5,
-  //   rating : 4.5,
-  //   price: 150,
-
-  //   favorite: 'favorite_border',
-  //   button_btn: 'Bye'
-  // },
-
-  // { 
-  //   image: '../../../../../assets/product7.png',
-  //   title: 'School Bag Canvas with Art Kit',
-  //   subtitle: 'Bag of Assorted Stationery Crayons , Sketch Pens.',
-  //   description: ' Oil Pastel, Gel pens, Mechanical Pencils, Clay with Kids Activity Book inside',
-
-  //   reviews: 75,
-  //   offers: 5,
-  //   rating : 4.5,
-  //   price: 150,
-
-  //   favorite: 'favorite_border',
-  //   button_btn: 'Bye'
-  // },
-
-  // { 
-  //   image: '../../../../../assets/product8.png',
-  //   title: 'School Bag Canvas with Art Kit',
-  //   subtitle: 'Bag of Assorted Stationery Crayons , Sketch Pens.',
-  //   description: ' Oil Pastel, Gel pens, Mechanical Pencils, Clay with Kids Activity Book inside',
-
-  //   reviews: 75,
-  //   offers: 5,
-  //   rating : 4.5,
-  //   price: 150,
-
-  //   favorite: 'favorite_border',
-  //   button_btn: 'Bye'
-  // },
-
-  
-  // { 
-  //   image: '../../../../../assets/product3.png',
-  //   title: 'School Bag Canvas with Art Kit',
-  //   subtitle: 'Bag of Assorted Stationery Crayons , Sketch Pens.',
-  //   description: ' Oil Pastel, Gel pens, Mechanical Pencils, Clay with Kids Activity Book inside',
-
-  //   reviews: 75,
-  //   offers: 5,
-  //   rating : 4.5,
-  //   price: 150,
-
-  //   favorite: 'favorite_border',
-  //   button_btn: 'Bye'
-  // },
-
-  // { 
-  //   image: '../../../../../assets/product1.png',
-  //   title: 'School Bag Canvas with Art Kit',
-  //   subtitle: 'Bag of Assorted Stationery Crayons , Sketch Pens.',
-  //   description: ' Oil Pastel, Gel pens, Mechanical Pencils, Clay with Kids Activity Book inside',
-
-  //   reviews: 75,
-  //   offers: 5,
-  //   rating : 4.5,
-  //   price: 150,
-
-  //   favorite: 'favorite_border',
-  //   button_btn: 'Bye'
-  // },
-];
+export interface USER {}
 @Component({
   selector: 'app-itemslist-products',
   templateUrl: './itemslist-products.component.html',
   styleUrls: ['./itemslist-products.component.scss']
 })
 export class ItemslistProductsComponent implements OnInit {
-  listDatas = ProductData;
 
-  constructor() { }
+  ELEMENT_DATA: USER[] = [];
+  isLoading = false;
+  totalRows = 0;
+  pageSize = 5;
+  currentPage = 0;
+  pageSizeOptions: number[] = [1, 5, 10, 25, 100];
+  products : any;
+  categoryId: any[];
+  brand: any
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
 
+
+  constructor( private productserv: ProductservicesList) { }
+  
   ngOnInit(): void {
+    this.lodeproduct();
+    
   }
+  ngAfterViewInit() {
+    console.log(this.brand)
+  }
+  lodeproduct() {
+    this.isLoading = true;
+    this.productserv.getAllProducts({pagesize : this.pageSize, page: this.currentPage + 1,}).subscribe((res : any) => {
+      this.products= res.rows;
+      setTimeout(() => {
+        this.paginator.pageIndex = this.currentPage;
+        this.paginator.length = res.count;
+      });
+      this.isLoading = false;
+    }, error => {
+      console.log(error);
+      this.isLoading = false;
+    });
+   }
+
+   pageChanged(event: PageEvent) {
+    console.log({ event });
+    this.pageSize = event.pageSize;
+    this.currentPage = event.pageIndex;
+    this.lodeproduct();
+  }
+  
+
 
 }

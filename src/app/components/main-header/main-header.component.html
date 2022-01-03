@@ -48,10 +48,8 @@
 <div class="mob-head">
     <mat-toolbar class="tool-bars">
         <div fxFlex.xs="33" fxFlex.sm="33" fxFlex.md="33" fxFlex.lg="33" fxFlex.xl="33">
-            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="gappx" >
-                <button mat-icon-button (click)="openSidebar()">
-                    <mat-icon class="icons-head">menu</mat-icon>
-                </button>            
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="gappx">
+                <mat-icon  class="icons-head">menu</mat-icon>
             </div>
         </div>
         <div fxFlex.xs="33" fxFlex.sm="33" fxFlex.md="33" fxFlex.lg="33" fxFlex.xl="33">
@@ -63,9 +61,7 @@
         </div>
         <div fxFlex.xs="34" fxFlex.sm="34" fxFlex.md="34" fxFlex.lg="34" fxFlex.xl="34">
             <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="gappx">
-                <button mat-icon-button >
-                    <mat-icon class="icons-head" routerLink="/cart-items" routerLinkActive="active">shopping_cart</mat-icon>
-                </button> 
+                <mat-icon  class="icons-head" routerLink="/cart-items" >shopping_cart</mat-icon>
             </div>
         </div>
     </mat-toolbar>
@@ -92,4 +88,3 @@
         </div>
     </mat-toolbar>
 </div>
-<app-sidebar class="side-bar" [isSidebarOpen]="isSidebarOpen" (closeSidebar)="closeSidebar()"></app-sidebar>

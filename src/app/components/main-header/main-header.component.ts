@@ -17,7 +17,6 @@ export class MainHeaderComponent implements OnInit {
   @Output() selectedChange = new EventEmitter<boolean>();
   constructor() { 
   }
-  isSidebarOpen: boolean = false;
 
   ngOnInit(): void {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -25,15 +24,6 @@ export class MainHeaderComponent implements OnInit {
       map(value => this._filter(value)),
     );
   }
-
-  openSidebar() {
-		this.isSidebarOpen = true;
-	}
-
-	closeSidebar() {
-		this.isSidebarOpen = false;
-	}
-
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 

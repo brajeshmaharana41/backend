@@ -1,12 +1,21 @@
-<div *ngFor="let listData of listDatas">
-    <app-list-product [listProduct] = "listData"></app-list-product>
+<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+<div *ngFor="let product of products">
+    <app-list-product [listProduct] = "product"></app-list-product>
 </div>
 <div class="item-desk">
-    <mat-paginator  [length]="100"
-                    [pageSize]="10"
-                    [pageSizeOptions]="[5, 10, 25, 100]"
-                    aria-label="Select page" class="filter">
+    <mat-paginator  #paginator [length]="totalRows" 
+                    [pageIndex]="currentPage" 
+                    [pageSize]="pageSize"
+                    [pageSizeOptions]="pageSizeOptions" 
+                    (page)="pageChanged($event)"
+                    aria-label="Select page" 
+                    class="filter">
     </mat-paginator>
+    <!-- <mat-paginator
+    [pageSizeOptions]="[5, 10, 15, 20, 30]"
+    showFirstLastButtons,
+    >
+  </mat-paginator> -->
 </div>  
 
 

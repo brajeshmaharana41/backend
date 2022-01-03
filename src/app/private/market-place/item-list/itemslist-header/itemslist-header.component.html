@@ -6,7 +6,10 @@
             </button>        
         </div>
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="gappx" class="item-head">
-            <div class="pl-2" *ngFor="let category of categorys.data">
+            <!-- <div class="pl-2">
+                <button mat-button class="chips-btn">Active Play & Physical Education</button>
+            </div> -->
+            <div class="pl-2" *ngFor="let category of categorys">
                 <button mat-button class="chips-btn">{{category.name}}</button>
             </div>
             <!-- <div class="pl-2">

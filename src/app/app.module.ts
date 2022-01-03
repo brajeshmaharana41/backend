@@ -133,11 +133,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { SearchResultComponent } from './components/search-result/search-result.component';
 import { ReviewInputComponent } from './private/my-account/orders/review-input/review-input.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { Store } from '@ngrx/store';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSortModule} from '@angular/material/sort';
 @NgModule({
   declarations: [
     AppComponent,
@@ -230,14 +227,13 @@ import { EffectsModule } from '@ngrx/effects';
     InviteSuccessComponent,
     SearchResultComponent,
     ReviewInputComponent,
-    SidebarComponent,
   ],
   imports: [
-    EffectsModule,
-    StoreModule.forRoot({}),    
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
     MatIconModule,
     MatToolbarModule,
     MatIconModule,
@@ -281,7 +277,6 @@ import { EffectsModule } from '@ngrx/effects';
   providers: [
     MatDatepickerModule,
     MatNativeDateModule,
-    Store
   ],
   bootstrap: [AppComponent]
 })
